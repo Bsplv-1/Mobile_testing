@@ -1,0 +1,35 @@
+ADB HW_1
+ADB - этот фитча для удаленного подключения к девайсам Android чтобы удалить/установить/сделать_сохранить скриншот/снять_сохранить логи 
+Скачать/Установить ADB с официального сайта Android
+Открыть Windows Shell (shift + клик на пустое поле папки с ADB, правой клавишей мыши), подключить тел проводом к компьютеру (вкл: отладка по USB, developer mode)
+
+Сценарий напишите в .txt файл.
+.txt сценарий и .log файл приложения todolist выгружайте на GitHub.
+Ссылку на гитхаб присылайте в лс.
+ 
+1. Отобразить подключенный девайс в консоли.
+.\adb devices
+
+ 2. Вывести адрес приложения todolist в системе Android
+.\adb shell 'pm list packages -f' | findstr reminder 
+ Название приложения в системе Android: "com.qrolic.reminderapp"
+
+ 3. Установить .apk файл приложения todolist на телефон с компьютера через  ADB
+перетащить файл с приложением в shell (появиться путь к приложению) 
+.\adb install C:\Users\Bsplv\Documents\TEST\Terminal\Mobile_testing\TodoList.apk (приложение установится на Android)
+
+ 4. Сделать скриншот запущенного приложения todolist и сразу скопировать на компьютер в одной команде.
+.\adb exec-out screencap -p > screen_32.png
+
+.\adb shell screencap /storage/emulated/0/DCIM/32_screenshot.png (сделать скриншшот с тел и сохранить на тел)
+.\adb pull /storage/emulated/0/DCIM/32_screenshot.png 32_screenshot.png (скачать скриншот с тел на компьютер)
+.\adb push 322_screenshot.png /storage/emulated/0/DCIM/322_screenshot.png (скачать скриншот с компьютера на тел)
+
+ 5. Вывести в консоль логи приложения todolist
+.\adb logcat -d | findstr com.android.todolist 
+
+ 6. Скопировать логи приложения todolist на компьютер.
+.\adb logcat -d | findstr com.android.todolist > reminder_todolist.log
+
+ 7. Удалить приложение todolist с телефона через ADB
+.\adb uninstall com.android.todolist
